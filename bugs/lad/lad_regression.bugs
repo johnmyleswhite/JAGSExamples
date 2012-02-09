@@ -1,0 +1,14 @@
+model
+{
+	for (i in 1:N)
+	{
+		y[i] ~ ddexp(mu[i], tau)
+		mu[i] <- a * x[i] + b
+	}
+	
+	a ~ dnorm(0, 0.0001)
+	b ~ dnorm(0, 0.0001)
+	
+	tau <- pow(sigma, -2)
+	sigma ~ dunif(0, 100)
+}
