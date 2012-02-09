@@ -1,0 +1,12 @@
+model
+{
+	for (i in 1:N)
+	{
+		x[i] ~ dbern(p)
+	}
+	
+	p ~ dbeta(alpha, beta)
+	
+	alpha <- 1
+	beta <- 1
+}
