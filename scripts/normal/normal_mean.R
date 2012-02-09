@@ -1,8 +1,8 @@
 library('rjags')
 
-df <- read.csv(file.path('data', 'normal_mean_strong_broken_prior.csv'))
+df <- read.csv(file.path('data', 'normal', 'normal_mean.csv'))
 
-jags <- jags.model('bugs/normal_mean_strong_broken_prior.bugs',
+jags <- jags.model(file.path('bugs', 'normal', 'normal_mean.bugs'),
                    data = list('x' = with(df, X),
                                'N' = nrow(df)),
                    n.chains = 4,

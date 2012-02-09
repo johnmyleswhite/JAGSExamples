@@ -6,5 +6,5 @@ sigma <- 3
 x <- rnorm(100, mu, sigma)
 
 write.csv(data.frame(X = x),
-          file = file.path('data', 'normal_mean_strong_prior.csv'),
+          file = file.path('data', 'normal', 'normal_mean.csv'),
           row.names = FALSE)

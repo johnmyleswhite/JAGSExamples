@@ -5,7 +5,7 @@ model
 		x[i] ~ dnorm(mu, tau)
 	}
 	
-	mu ~ dnorm(-1000, 1)
+	mu ~ dnorm(-1000, 10)
 	
 	sigma <- 3
 	tau <- pow(sigma, -1)
