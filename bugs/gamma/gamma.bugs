@@ -1,0 +1,10 @@
+model
+{
+	for (i in 1:N)
+	{
+		x[i] ~ dgamma(shape, rate)
+	}
+
+	shape ~ dgamma(0.0001, 0.0001)
+	rate ~ dgamma(0.0001, 0.0001)
+}
