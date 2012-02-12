@@ -1,0 +1,16 @@
+model
+{
+	for (i in 1:N)
+	{
+		y[i] ~ dnorm(mu[i], tau)
+		mu[i] <- beta[1] + x[i, 1:M] %*% beta[2:(M + 1)]
+	}
+	
+	for (j in 1:(M + 1))
+	{
+		beta[j] ~ ddexp(0, 0.0001)
+	}
+	
+	sigma ~ dunif(0, 10000)
+	tau <- pow(sigma, -2)
+}
