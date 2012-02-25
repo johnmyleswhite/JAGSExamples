@@ -16,4 +16,17 @@ plot(mcmc.samples)
 
 summary(mcmc.samples)
 
-with(df, sum(X) + 1) / (nrow(df) + 2)
+alpha <- with(df, sum(X) + 1)
+beta <- nrow(df) + 2 - alpha
+
+alpha / (alpha + beta)
+
+# Compare distribution of samples with theoretical density.
+samples <- data.frame(MCMC = as.matrix(mcmc.samples)[, 1])
+density.plot <- ggplot(samples, aes(x = MCMC)) +
+  geom_density(aes(color = 'Sampling'))
+
+x <- seq(0, 1, by = 0.01)
+analytic <- data.frame(x = x, y = dbeta(x, alpha, beta))
+density.plot <- density.plot +
+  geom_line(data = analytic, aes(x = x, y = y, color = 'Analytic'))
