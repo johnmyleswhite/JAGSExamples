@@ -1,0 +1,12 @@
+model
+{
+	for (i in 1:N)
+	{
+		y[i] ~ dbern(p[i])
+		p[i] <- pt(z[i], 0, 1, 1)
+		z[i] <- a * x[i] + b
+	}
+	
+	a ~ dnorm(0, 0.0001)
+	b ~ dnorm(0, 0.0001)
+}
