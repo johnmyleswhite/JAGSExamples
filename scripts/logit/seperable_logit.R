@@ -2,16 +2,14 @@
 library('rjags')
 
 df <- read.csv(file.path('data',
-                         'probit',
-                         'probit_regression.csv'))
+                         'logit',
+                         'separable_logit.csv'))
 
-png(file.path('graphs', 'probit', 'data_plot.png'))
 with(df, plot(X, Y))
-dev.off()
 
 jags <- jags.model(file.path('bugs',
-                             'probit',
-                             'probit.bugs'),
+                             'logit',
+                             'separable_logit.bugs'),
                    data = list('x' = with(df, X),
                                'y' = with(df, Y),
                                'N' = nrow(df)),
@@ -22,9 +20,11 @@ mcmc.samples <- coda.samples(jags,
                         c('a', 'b'),
                         5000)
 
-png(file.path('graphs', 'probit', 'plot1.png'))
 plot(mcmc.samples)
-dev.off()
 
-summary(mcmc.samples)
+summary(mcmc.samples)$statistics
 
+# Compare with GLM solution.
+glm(Y ~ X,
+    data = df,
+    family = binomial(link = 'logit'))
