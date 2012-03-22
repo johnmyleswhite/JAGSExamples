@@ -1,8 +1,13 @@
+# Basic inference.
 library('rjags')
 
-df <- read.csv(file.path('data', 'normal', 'normal_mean.csv'))
+df <- read.csv(file.path('data',
+                         'normal',
+                         'normal_mean.csv'))
 
-jags <- jags.model(file.path('bugs', 'normal', 'normal_mean.bugs'),
+jags <- jags.model(file.path('bugs',
+                             'normal',
+                             'normal_mean.bugs'),
                    data = list('x' = with(df, X),
                                'N' = nrow(df)),
                    n.chains = 4,
