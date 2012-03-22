@@ -1,0 +1,22 @@
+model
+{
+	for (i in 1:N)
+	{
+		y[i] ~ dbern(p[i])
+		logit(p[i]) <- a[g[i]] * x[i] + b[g[i]]
+	}
+	
+	for (j in 1:K)
+	{
+		a[j] ~ dnorm(mu.a, tau.a)
+		b[j] ~ dnorm(mu.b, tau.b)
+	}
+
+	mu.a ~ dnorm(0, 0.0001)
+	mu.b ~ dnorm(0, 0.0001)
+
+	tau.a <- pow(sigma.a, -2)
+	tau.b <- pow(sigma.b, -2)
+	sigma.a ~ dunif(0, 1000)
+	sigma.b ~ dunif(0, 1000)
+}
