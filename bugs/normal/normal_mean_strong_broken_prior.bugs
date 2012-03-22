@@ -8,5 +8,5 @@ model
 	mu ~ dunif(0, 1)
 	
 	sigma <- 3
-	tau <- pow(sigma, -1)
+	tau <- pow(sigma, -2)
 }

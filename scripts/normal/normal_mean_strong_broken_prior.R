@@ -12,6 +12,8 @@ mcmc.samples <- coda.samples(jags,
                              c('mu'),
                              1000)
 
+png(file.path('graphs', 'normal', 'plot4.png'))
 plot(mcmc.samples)
+dev.off()
 
 summary(mcmc.samples)
