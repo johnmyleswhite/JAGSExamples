@@ -1,0 +1,14 @@
+model
+{
+	for (j in 1:K)
+	{
+		alpha[j] <- 1
+	}
+	
+	pi ~ ddirch(alpha[1:K])
+	
+	for (i in 1:N)
+	{
+		z[i, 1:K] ~ dmulti(pi, 1)
+	}
+}
