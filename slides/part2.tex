@@ -158,7 +158,7 @@ summary(mcmc.samples)
 
 \begin{frame}[fragile]
   \begin{center}
-    \includegraphics[scale = 0.4]{../JAGSExamples/graphs/binomial/plot.png}
+    \includegraphics[scale = 0.4]{../graphs/binomial/plot.png}
   \end{center}
 \end{frame}
 
@@ -196,24 +196,9 @@ summary(mcmc.samples)$statistics
   \end{verbatim}
 \end{frame}
 
-%\begin{frame}[fragile]
-%  \begin{verbatim}
-%samples <- data.frame(MCMC = as.matrix(mcmc.samples)[, 1])
-%density.plot <- ggplot(samples, aes(x = MCMC)) +
-%  geom_density(aes(color = 'Sampling'))
-%
-%x <- seq(0, 1, by = 0.01)
-%analytic <- data.frame(x = x, y = dbeta(x, alpha, beta))
-%density.plot <- density.plot +
-%  geom_line(data = analytic, aes(x = x,
-%                                 y = y,
-%                                 color = 'Analytic'))
-%  \end{verbatim}
-%\end{frame}
-
 \begin{frame}[fragile]
   \begin{center}
-    \includegraphics[scale = 0.1]{../JAGSExamples/graphs/binomial/density.png}
+    \includegraphics[scale = 0.1]{../graphs/binomial/density.png}
   \end{center}
 \end{frame}
 
@@ -268,7 +253,7 @@ plot(mcmc.samples)
 
 \begin{frame}[fragile]
   \begin{center}
-    \includegraphics[scale = 0.4]{../JAGSExamples/graphs/binomial/broken_plot.png}
+    \includegraphics[scale = 0.4]{../graphs/binomial/broken_plot.png}
   \end{center}
 \end{frame}
 
@@ -387,14 +372,9 @@ Sample size per chain = 1000
 
 \begin{frame}[fragile]
   \begin{center}
-    \includegraphics[scale = 0.4]{../JAGSExamples/graphs/normal/plot1.png}
+    \includegraphics[scale = 0.4]{../graphs/normal/plot1.png}
   \end{center}
 \end{frame}
-
-%\begin{frame}[fragile]
-%Frequentist CI
-%Credible interval
-%\end{frame}
 
 \begin{frame}[fragile]
   \begin{itemize}
@@ -457,7 +437,7 @@ Sample size per chain = 1000
 
 \begin{frame}[fragile]
   \begin{center}
-    \includegraphics[scale = 0.4]{../JAGSExamples/graphs/normal/plot2.png}
+    \includegraphics[scale = 0.4]{../graphs/normal/plot2.png}
   \end{center}
 \end{frame}
 
@@ -506,7 +486,7 @@ Sample size per chain = 1000
 
 \begin{frame}[fragile]
   \begin{center}
-    \includegraphics[scale = 0.4]{../JAGSExamples/graphs/normal/plot3.png}
+    \includegraphics[scale = 0.4]{../graphs/normal/plot3.png}
   \end{center}
 \end{frame}
 
@@ -537,7 +517,7 @@ model
 
 \begin{frame}[fragile]
   \begin{center}
-    \includegraphics[scale = 0.4]{../JAGSExamples/graphs/normal/plot4.png}
+    \includegraphics[scale = 0.4]{../graphs/normal/plot4.png}
   \end{center}
 \end{frame}
 
@@ -582,9 +562,6 @@ I beseech you, in the bowels of Christ, think it possible that you may be mistak
     \end{itemize}
   \end{itemize}
 \end{frame}
-
-% Normal mean and variance inference (uniform prior)
-% Normal mean and variance inference (gamma prior)
 
 \begin{frame}[fragile]
   \begin{itemize}
@@ -650,7 +627,7 @@ with(df, plot(X, Y))
 
 \begin{frame}[fragile]
   \begin{center}
-    \includegraphics[scale = 0.4]{../JAGSExamples/graphs/ols/data_plot.png}
+    \includegraphics[scale = 0.4]{../graphs/ols/data_plot.png}
   \end{center}
 \end{frame}
 
@@ -677,7 +654,7 @@ summary(mcmc.samples)
 
 \begin{frame}[fragile]
   \begin{center}
-    \includegraphics[scale = 0.4]{../JAGSExamples/graphs/ols/plot1.png}
+    \includegraphics[scale = 0.4]{../graphs/ols/plot1.png}
   \end{center}
 \end{frame}
 
@@ -745,7 +722,7 @@ with(df, plot(X, Y))
 
 \begin{frame}[fragile]
   \begin{center}
-    \includegraphics[scale = 0.4]{../JAGSExamples/graphs/ols/outlier_data_plot.png}
+    \includegraphics[scale = 0.4]{../graphs/ols/outlier_data_plot.png}
   \end{center}
 \end{frame}
 
@@ -782,7 +759,7 @@ summary(mcmc.samples)
 
 \begin{frame}[fragile]
   \begin{center}
-    \includegraphics[scale = 0.4]{../JAGSExamples/graphs/ols/plot2.png}
+    \includegraphics[scale = 0.4]{../graphs/ols/plot2.png}
   \end{center}
 \end{frame}
 
@@ -814,7 +791,7 @@ sigma 150.876 181.921 203.17 228.62 293.77
 {
   \begin{itemize}
     \item{Using a heavier-tailed error distribution gives the outlier less influence}
-    \item{We use Laplace errors, but we could other distributions}
+    \item{We use Laplace errors, but we could use other distributions}
   \end{itemize}
 }
 
@@ -873,7 +850,7 @@ summary(mcmc.samples)
 
 \begin{frame}[fragile]
   \begin{center}
-    \includegraphics[scale = 0.4]{../JAGSExamples/graphs/lad/plot1.png}
+    \includegraphics[scale = 0.4]{../graphs/lad/plot1.png}
   \end{center}
 \end{frame}
 
@@ -915,41 +892,11 @@ sigma  6.361  7.264  7.869   8.513  10.22
   \end{itemize}
 \end{frame}
 
-%\begin{frame}[fragile]
-%  \begin{verbatim}
-%lad.coef <- summary(mcmc.samples)$statistics[c(2, 1), 1]
-%ols.coef <- coef(lm(Y ~ X, data = df))
-%
-%library('ggplot2')
-%
-%ggplot(df, aes(x = X, y = Y)) +
-%  geom_point() +
-%  geom_abline(intercept = lad.coef[1],
-%              slope = lad.coef[2],
-%              color = "blue") +
-%  geom_abline(intercept = ols.coef[1],
-%              slope = ols.coef[2],
-%              color = "green")
-%  \end{verbatim}
-%\end{frame}
-
 \begin{frame}[fragile]
   \begin{center}
-    \includegraphics[scale = 0.1]{../JAGSExamples/graphs/lad/lad_vs_ols.png}
+    \includegraphics[scale = 0.1]{../graphs/lad/lad_vs_ols.png}
   \end{center}
 \end{frame}
-
-%\begin{frame}[fragile]
-%  \begin{itemize}
-%    \item{Our OLS and LAD models are technically not the OLS and LAD solutions}
-%    \item{Because we did not use flat priors, our models are closed to ridge regression}
-%    \item{By changing our coefficient priors, we can produce the Bayesian equivalent of the Lasso}
-%  \end{itemize}
-%\end{frame}
-
-%\begin{frame}
-%LASSO HERE
-%\end{frame}
 
 \begin{frame}[fragile]
   Instead of modeling continuous data, we can model 0/1 data:
@@ -1005,7 +952,7 @@ with(df, plot(X, Y))
 
 \begin{frame}[fragile]
   \begin{center}
-    \includegraphics[scale = 0.4]{../JAGSExamples/graphs/logit/data_plot.png}
+    \includegraphics[scale = 0.4]{../graphs/logit/data_plot.png}
   \end{center}
 \end{frame}
 
@@ -1041,7 +988,7 @@ summary(mcmc.samples)
 
 \begin{frame}[fragile]
   \begin{center}
-    \includegraphics[scale = 0.4]{../JAGSExamples/graphs/logit/plot1.png}
+    \includegraphics[scale = 0.4]{../graphs/logit/plot1.png}
   \end{center}
 \end{frame}
 
@@ -1119,7 +1066,7 @@ with(df, plot(X, Y))
 
 \begin{frame}[fragile]
   \begin{center}
-    \includegraphics[scale = 0.4]{../JAGSExamples/graphs/probit/data_plot.png}
+    \includegraphics[scale = 0.4]{../graphs/probit/data_plot.png}
   \end{center}
 \end{frame}
 
@@ -1155,7 +1102,7 @@ summary(mcmc.samples)
 
 \begin{frame}[fragile]
   \begin{center}
-    \includegraphics[scale = 0.4]{../JAGSExamples/graphs/probit/plot1.png}
+    \includegraphics[scale = 0.4]{../graphs/probit/plot1.png}
   \end{center}
 \end{frame}
 
@@ -1234,7 +1181,7 @@ with(df, plot(X, Y))
 
 \begin{frame}[fragile]
   \begin{center}
-    \includegraphics[scale = 0.4]{../JAGSExamples/graphs/robit/data_plot.png}
+    \includegraphics[scale = 0.4]{../graphs/robit/data_plot.png}
   \end{center}
 \end{frame}
 
@@ -1270,7 +1217,7 @@ summary(mcmc.samples)
 
 \begin{frame}[fragile]
   \begin{center}
-    \includegraphics[scale = 0.4]{../JAGSExamples/graphs/robit/plot1.png}
+    \includegraphics[scale = 0.4]{../graphs/robit/plot1.png}
   \end{center}
 \end{frame}
 
@@ -1287,17 +1234,6 @@ apply(as.matrix(mcmc.samples), 2, median)
 # 2.031132 -4.533720 
   \end{verbatim}
 \end{frame}
-
-%\begin{frame}
-%  \begin{itemize}
-%    \item{Bayesian methods are particularly strong here, since they prevent infinite coefficients}
-%  \end{itemize}
-%\end{frame}
-
-%\begin{frame}[fragile]
-%We can do much more in the GLM family also.
-%- Gamma Regression
-%\end{frame}
 
 \begin{frame}
   \begin{itemize}
@@ -1317,10 +1253,6 @@ apply(as.matrix(mcmc.samples), 2, median)
   \end{itemize}
 \end{frame}
 
-%\begin{frame}[fragile]
-%Mixture of Gaussians
-%\end{frame}
-
 \begin{frame}[fragile]
   Let's go through three such problems:
   \begin{itemize}
@@ -1330,6 +1262,13 @@ apply(as.matrix(mcmc.samples), 2, median)
   \end{itemize}
 \end{frame}
 
+\frame
+{
+  \begin{center}
+      \includegraphics[scale = 0.3]{efron.png}
+  \end{center}
+}
+
 \begin{frame}[fragile]
   \begin{itemize}
     \item{In a hierarchical model, we have groups of parameters}
@@ -1337,12 +1276,6 @@ apply(as.matrix(mcmc.samples), 2, median)
     \item{We induce this by adding a layer of adjustable priors to our model}
   \end{itemize}
 \end{frame}
-
-%\begin{frame}[fragile]
-%  \begin{itemize}
-%    \item{REAL WORLD EXAMPLE 1}
-%  \end{itemize}
-%\end{frame}
 
 \begin{frame}
   \begin{itemize}
@@ -1443,7 +1376,7 @@ summary(mcmc.samples)
 
 \begin{frame}[fragile]
   \begin{center}
-    \includegraphics[scale = 0.4]{../JAGSExamples/graphs/hierarchical/linear_plot1.png}
+    \includegraphics[scale = 0.4]{../graphs/hierarchical/linear_plot1.png}
   \end{center}
 \end{frame}
 
@@ -1562,7 +1495,7 @@ summary(mcmc.samples)
 
 \begin{frame}[fragile]
   \begin{center}
-    \includegraphics[scale = 0.4]{../JAGSExamples/graphs/hierarchical/logit_plot1.png}
+    \includegraphics[scale = 0.4]{../graphs/hierarchical/logit_plot1.png}
   \end{center}
 \end{frame}
 
@@ -1755,13 +1688,13 @@ df <- read.csv(file.path('data',
 
 \begin{frame}[fragile]
   \begin{center}
-    \includegraphics[scale = 0.1]{../JAGSExamples/graphs/mixture_models/blind_histogram.png}
+    \includegraphics[scale = 0.1]{../graphs/mixture_models/blind_histogram.png}
   \end{center}
 \end{frame}
 
 \begin{frame}[fragile]
   \begin{center}
-    \includegraphics[scale = 0.1]{../JAGSExamples/graphs/mixture_models/labelled_histogram.png}
+    \includegraphics[scale = 0.1]{../graphs/mixture_models/labelled_histogram.png}
   \end{center}
 \end{frame}
 
@@ -1797,7 +1730,7 @@ summary(mcmc.samples)
 
 \begin{frame}[fragile]
   \begin{center}
-    \includegraphics[scale = 0.4]{../JAGSExamples/graphs/mixture_models/two_normals_plot1.png}
+    \includegraphics[scale = 0.4]{../graphs/mixture_models/two_normals_plot1.png}
   \end{center}
 \end{frame}
 

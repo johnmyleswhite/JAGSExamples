@@ -34,8 +34,8 @@
 \frame
 {
   \begin{itemize}
-    \item{Since Hume, we've known that experience is fallible}
-    \item{So how do we cope with experiences that are not perfectly informative?}
+    \item{Since Hume, we've known that induction is problematic}
+    \item{How do we use experiences that are not perfectly informative?}
   \end{itemize}
 }
 
@@ -43,9 +43,9 @@
 {
   A motivating example:
   \begin{itemize}
-    \item{Imagine that you've arrived in a new city for the first time}
-    \item{It's raining on the day when you arrive}
-    \item{Do you conclude that it rains every day in this new city?}
+    \item{Imagine that you've gone to a new restaurant for the first time}
+    \item{A mistake is made with your order}
+    \item{Do you conclude that a mistake is made with every order?}
   \end{itemize}
 }
 
@@ -62,10 +62,10 @@
 \frame
 {
   \begin{itemize}
-    \item<1->{We assume that each day it either rains or it does not}
-    \item<2->{We encode rain as a binary variable that takes on values of 0 or 1}
+    \item<1->{We assume that each order either has a mistake or doesn't}
+    \item<2->{We encode a mistake as a binary variable that takes on values of 0 or 1}
     \item<3->{We assume that this binary variable is a random variable with a probability distribution over $\{0, 1\}$}
-    \item<4->{We assume that each separate day is an independent instantiation of this random variable}
+    \item<4->{We assume that each separate order is an independent instantiation of this random variable}
   \end{itemize}
 }
 
@@ -80,10 +80,10 @@
 \frame
 {
   \begin{itemize}
-    \item{Each individual day's weather is being modeled as a Bernoulli variable}
-    \item{$n$ days taken together are a binomial variable}
-    \item{Either model has exactly one unknown parameter: $p$, the probability of raining}
-    \item{We wish to estimate this parameter}
+    \item{Each order's accuracy is modeled as a Bernoulli variable}
+    \item{$n$ orders taken together are a binomial variable}
+    \item{Either model has exactly one unknown parameter: $p$, the probability of a mistake}
+    \item{We want to estimate this parameter}
   \end{itemize}
 }
 
@@ -108,7 +108,7 @@
 
 \frame
 {
- Some estimates given one day's worth of rain:
+ Some estimates given one order:
  \begin{itemize}
    \item{Point Estimate: $\hat{p} = 1$ (MLE)}
    \item{Interval Estimate: $[\hat{p}_{l}, \hat{p}_{u}]$ = [0.025, 1.000] (95\% CI)}
@@ -124,7 +124,6 @@
   \begin{itemize}
     \item{Throughout this seminar I'm going to focus on Bayesian estimation}
     \item{I'll contrast it with point and interval estimation}
-    \item{I won't discuss hypothesis testing at all}
   \end{itemize}
 }
 
@@ -137,15 +136,15 @@
     \item{We write the probability of a data set as $p(D) = p(x_1, x_2, \ldots, x_n)$}
     \item{In this seminar, every model will be defined by a finite number of parameters}
     \item{Instead of the single parameter, $p$, we'll have a list of parameters, $\theta$}
-    \item{We then write $p(x_1, x_2, \ldots, x_n | \theta)$}
+    \item{We then write $p(D | \theta)$}
   \end{itemize}
 }
 
 \frame
 {
   \begin{itemize}
-    \item{If our data set is fixed, we can treat $p(x_1, x_2, \ldots, x_n | \theta)$ as a function of $\theta$}
-    \item{We'll sometimes write $L(\theta; x_1, x_2, \ldots, x_n)$ to describe this function}
+    \item{If our data set is fixed, we can treat $p(D | \theta)$ as a function of $\theta$}
+    \item{We'll sometimes write $L(\theta; D)$ to describe this function}
     \item{This function is called the likelihood function}
     \item{$L$ tells us the probability of seeing any specific data set if the parameters of the model were set to $\theta$}
   \end{itemize}
@@ -179,18 +178,18 @@
 \frame
 {
   \begin{itemize}
-    \item{Let's see how these assumptions play out for data about many days worth of weather}
-    \item{We'll assume we've seen $n$ days of weather}
-    \item{We'll assume it rained on $n - 1$ days and did not rain on only 1 day}
+    \item{Let's see how these assumptions play out for data about many orders' accuracy}
+    \item{We'll assume we've seen $n$ orders}
+    \item{We'll assume a mistake occurred with $n - 1$ orders and $1$ order was accurate}
   \end{itemize}
 }
 
 \frame
 {
   \begin{itemize}
-    \item{The probability of rain on any given day is $\theta$}
-    \item{The occurrence of rain on each of the $n$ days is independent}
-    \item{The probability of our data set given $\theta$ is thus}
+    \item{The probability of a mistake in any given order is $\theta$}
+    \item{The occurrence of a mistake in each order is independent}
+    \item{The probability of our data set given $\theta$ is therefore}
   \[
   \binom{n}{n - 1} \theta ^ {n - 1} (1 - \theta)
   \]
@@ -223,7 +222,7 @@
 \frame
 {
  \begin{itemize}
-   \item{We've seen rain on 90\% of days}
+   \item{We've seen mistakes in 90\% of our orders}
    \item{The likelihood function has a single peak at $\theta = 0.9$}
    \item{We might guess that we can estimate $\theta$ by maximizing the likelihood function}
  \end{itemize}
@@ -276,14 +275,6 @@ If we had to predict the future from our model, we should use parameter values t
   \end{itemize}
 }
 
-%\frame
-%{
-%  \begin{itemize}
-%    \item{The constant-free log likelihood is a simple calculus problem}
-%    \item{You'll find that the maximum occurs at $\frac{n - 1}{n}$}
-%  \end{itemize}
-%}
-
 \frame
 {
   \begin{itemize}
@@ -298,9 +289,6 @@ If we had to predict the future from our model, we should use parameter values t
     \item{Prior to Fisher's work, statistics often involved the ad hoc construction of methods for estimating parameters}
     \item{Let's review those ideas, because they're important for thinking critically about Bayesian estimation}
   \end{itemize}
-% In order to give a point estimate of $\theta$, we don't need to use probability theory every time.
-% We can build an algorithm that takes a data set
-% calculates the mean and uses that as our estimate of $\theta$
 }
 
 \frame
@@ -334,12 +322,6 @@ If we had to predict the future from our model, we should use parameter values t
   \end{itemize}
 }
 
-%\frame
-%{
-% Before Fisher's work unified much of existing statistical practice, a large part of statistical theory was the construction of estimators and their evaluation
-% 
-%}
-
 \frame
 {
   Sampling distribution analysis:
@@ -350,11 +332,6 @@ If we had to predict the future from our model, we should use parameter values t
     \item{We look at the distribution of our estimator after repeated sampling}
   \end{itemize}
 }
-
-%\frame
-%{
-%  Because we've repeatedly constructed random samples, this is called the sampling distribution of an estimator. We can approximate this sampling distribution by random sampling or analyze it theoretically using probability theory
-%}
 
 \frame
 {
@@ -369,11 +346,6 @@ If we had to predict the future from our model, we should use parameter values t
     \item{We then analyze the quality of an estimator by analyzing its sampling distribution}
   \end{itemize}
 }
-
-%\frame
-%{
-% Statistical theory was predominantly concerned with understanding the sampling distribution of estimators so that the best estimators could be chosen and so that one could understand how good the best estimator was really going to work
-%}
 
 \frame
 {
@@ -430,7 +402,7 @@ If we had to predict the future from our model, we should use parameter values t
     \[
     \lim_{n \to \infty} \hat{\theta} = \theta
     \]
-    \item{An consistent estimator gets closer to $\theta$ as we get more data}
+    \item{A consistent estimator gets closer to $\theta$ as we get more data}
     \item{To be consistent, the bias and variance must both go to 0 as $n$ grows}
   \end{itemize}
 }
@@ -462,19 +434,10 @@ If we had to predict the future from our model, we should use parameter values t
   \end{itemize}
 }
 
-%\frame
-%{
-%  The theorem was shocking because asymptotically the MLE has the lowest variance
-%  but not in finite samples
-%  It was also shocking because the specific estimator they
-%  used
-%}
-
 \frame
 {
   \begin{itemize}
     \item{Since the 50's, interest has grown in alternative estimation strategies }
-    %\item{It is now clear that estimators need to be considered on multiple dimensions}
     \item{It is now clear that unbiased estimators are sometimes bad in practice}
     \item{It is now clear that finite sample behavior is not the same as asymptotic behavior}
   \end{itemize}
@@ -515,11 +478,6 @@ If we had to predict the future from our model, we should use parameter values t
   \end{center}
 }
 
-%\frame
-%{
-%  As the likelihood function becomes tighter around the MLE, we become more certain of the value of $\theta$
-%}
-
 \frame
 {
   \begin{itemize}
@@ -541,88 +499,6 @@ If we had to predict the future from our model, we should use parameter values t
   \end{itemize}
 }
 
-%\frame
-%{
-%Let's leave behind point estimators, skip interval estimators and move to Bayesian estimation
-%}
-
-\frame
-{
-  \begin{itemize}
-    \item{To motivate that language, let's start with a very loose treatment of the Cox axioms}
-    \item{We'll follow Jaynes' treatment}
-  \end{itemize}
-}
-
-\frame
-{
-  \begin{quote}
-The actual science of logic is conversant at present only with things either certain, impossible, or entirely doubtful, none of which (fortunately) we have to reason on. Therefore the true logic for this world is the calculus of Probabilities, which takes account of the magnitude of the probability which is, or ought to be, in a reasonable man's mind.
-  \end{quote}
-  \begin{itemize}
-    \item{James Clerk Maxwell}
-  \end{itemize}
-}
-
-\frame
-{
- Traditional logic:
- \begin{itemize}
-   \item{If A then B}
-   \item{A}
-   \item{B}
- \end{itemize}
-}
-
-\frame
-{
-  \begin{itemize}
-    \item{How do we extend this approach to situations in which A is not certain?}
-  \end{itemize}
-}
-
-\frame
-{
-  The Cox Axioms a la Jaynes:
-  \begin{itemize}
-    \item{This approach is a heuristic for thinking about how reasoning \emph{should} work in a hypothetical robot}
-    \item{It may not be fully rigorous}
-    \item{It is unquestionably \emph{not} a description of human reasoning \emph{does} works}
-  \end{itemize}
-}
-
-\frame
-{
-  \emph{Axiom I}: Degrees of Plausibility are represented by real numbers
-}
-
-\frame
-{
-  \emph{Axiom II}: Qualitative correspondence with common sense
-  \begin{itemize}
-    \item{If $(A | C') > (A | C)$ and $(B | AC') = (B | AC)$}
-    \item{Then $(AB | C') \geq (AB | C)$ and $(\bar{A} | C') < (\bar{A} | C)$}
-  \end{itemize}
-}
-
-\frame
-{
-  \emph{Axiom III}: Consistency
-  \begin{itemize}
-    \item{3a: If a conclusion can be reasoned out in more than one way, then every possible way must lead to the same result}
-    \item{3b: The robot always takes into account all of the evidence it has relevant to the question. It does not arbitrarily ignore some of the information, basing its conclusions only on what remains. In other words, the robot is completely non-ideological}
-    \item{3c: The robot always represents equivalent states of knowledge by equivalent probability assignments. That is, if in two problems the robot's state of knowledge is the same (except perhaps for the labelling of the propositions), then it must assign the same plausibilities in both}
-  \end{itemize}
-}
-
-\frame
-{
-  \begin{itemize}
-    \item{We can satisfy these demands if we represent our belief in statements about $\theta$ using probability theory}
-    \item{So let's represent our beliefs using probability distributions}
-  \end{itemize}
-}
-
 \frame
 {
   \begin{itemize}
@@ -635,9 +511,9 @@ The actual science of logic is conversant at present only with things either cer
 \frame
 {
   \begin{itemize}
-    \item{We wish to calculate our belief distribution after seeing data, $D = x_1, \ldots, x_n$:
-$p(\theta | x_1, \ldots, x_n)$}
-    \item{We call this distribution our posterior, $p(\theta | D)$}
+    \item{We wish to calculate our belief distribution after seeing data, $D$:
+$p(\theta | D)$}
+    \item{We call this distribution our posterior}
     \item{It is a posterior because it represents our beliefs after we see data}
   \end{itemize}
 }
@@ -655,10 +531,10 @@ p(\theta | x_1, \ldots, x_n) = \frac{p(x_1, \ldots, x_n | \theta) p(\theta)}{p(x
 \frame
 {
   \begin{itemize}
-    \item{$p(x_1, \ldots, x_n)$ is called the evidence. It is a constant wrt $\theta$}
+    \item{$p(D)$ is called the evidence. It is a constant}
     \item{Therefore}
     \[
-    p(\theta | x_1, \ldots, x_n) \propto p(x_1, \ldots, x_n | \theta) p(\theta)
+    p(\theta | D) \propto p(D | \theta) p(\theta)
     \]
   \end{itemize}
 }
@@ -669,7 +545,6 @@ p(\theta | x_1, \ldots, x_n) = \frac{p(x_1, \ldots, x_n | \theta) p(\theta)}{p(x
  \begin{itemize}
    \item{Up to a scaling factor, the value of our posterior at a point $\theta^{*}$ is the product of the likelihood function evaluated at $\theta^{*}$ and the prior evaluated at $\theta^{*}$}
    \item{If our prior is flat, the posterior's shape is the likelihood function's shape}
-   %\item{If our prior is  everywhere, the posterior \emph{is exactly} the likelihood function}
  \end{itemize}
 }
 
@@ -678,13 +553,13 @@ p(\theta | x_1, \ldots, x_n) = \frac{p(x_1, \ldots, x_n | \theta) p(\theta)}{p(x
   \begin{itemize}
     \item{In practice calculating the posterior is hard because the evidence can be impossible to calculate analytically}
     \item{But we can usually make good approximations}
-    \item{And, in some special circumstances, we can get analytic solutions}
+    \item{In some special circumstances, we can get analytic solutions}
   \end{itemize}
 }
 
 \frame
 {
- Approximation strategy I:
+ Approximation strategy 1:
   \begin{itemize}
     \item{We want the posterior only at $n$ points on a grid}
     \item{We find the unnormalized posterior by multiplying the likelihood and prior}
@@ -712,6 +587,13 @@ p(\theta | x_1, \ldots, x_n) = \frac{p(x_1, \ldots, x_n | \theta) p(\theta)}{p(x
 \frame
 {
   \begin{center}
+    In this example, we can calculate the exact posterior for comparison
+  \end{center}
+}
+
+\frame
+{
+  \begin{center}
     \includegraphics[scale = 0.1]{grid_quality.png}
   \end{center}
 }
@@ -719,7 +601,8 @@ p(\theta | x_1, \ldots, x_n) = \frac{p(x_1, \ldots, x_n | \theta) p(\theta)}{p(x
 \frame
 {
   \begin{itemize}
-    \item{Where does grid approximation go wrong?}
+    \item{Here grid approximation works perfectly}
+    \item{So where does grid approximation go wrong?}
     \item{Computational time and space is exponential in number of parameters in $\theta$}
     \item{Unclear how fine resolution of grid must be}
   \end{itemize}
@@ -753,7 +636,7 @@ p(\theta | x_1, \ldots, x_n) = \frac{p(x_1, \ldots, x_n | \theta) p(\theta)}{p(x
   \begin{itemize}
     \item{Let's work further with our example}
     \item{Our prior will be a $B(2, 3)$ distribution}
-    \item{We'll suppose we've seen 9 more days of rain and 1 new dry day}
+    \item{We'll suppose we've seen 9 more mistaken orders and 1 correct order}
     \item{Our posterior is then a $B(11, 4)$ distribution}
   \end{itemize}
 }
@@ -798,24 +681,6 @@ p(\theta | x_1, \ldots, x_n) = \frac{p(x_1, \ldots, x_n | \theta) p(\theta)}{p(x
   \end{itemize}
 }
 
-%\frame
-%{
-%  \begin{itemize}
-%    \item{
-%  \end{itemize}
-%This can sometimes be calculated analytically
-%}
-
-%\frame
-%{
-%Maximum of posterior occurs at maximum of unnormalized posterior, so evidence drops out
-%}
-
-%\frame
-%{
-%Maximum of posterior occurs at maximum of log posterior
-%}
-
 \frame
 {
 Using the MAP via maximizing its log value is like penalized maximum likelihood:
@@ -823,11 +688,6 @@ Using the MAP via maximizing its log value is like penalized maximum likelihood:
 \log[p(\theta | D)] = \log[L(\theta | D) p(\theta)] = \log[L(\theta | D)] + \log[p(\theta)]
 \]
 }
-
-%\frame
-%{
-%This makes it clear that the prior acts like a regularization term for making maximum likelihood estimation less brittle
-%}
 
 \frame
 {
@@ -844,31 +704,69 @@ Using the MAP via maximizing its log value is like penalized maximum likelihood:
 
 \frame
 {
+  Decision theory:
+  \begin{itemize}
+    \item{We must decide what action to take}
+    \item{We estimate the value of each action using our posterior}
+    \item{We select the decision with the highest expected value}
+  \end{itemize}
+}
+
+\frame
+{
+  Pascal's Wager:
+  \begin{itemize}
+    \item{Assume that our estimated probability that God exists is $p$}
+    \item{Then the expected value of belief in God is $(1 - p) * 0 + p * \infty$}
+    \item{The expected value of disbelief in God is $(1 - p) * 0 + p * 0$}
+    \item{We should therefore choose to believe}
+  \end{itemize}
+}
+
+\frame
+{
+  \begin{itemize}
+    \item{In statistics, our decision is our estimate of $\theta$}
+    \item{We choose the estimate that minimizes our expected loss}
+  \end{itemize}
+}
+
+\frame
+{
+  \begin{itemize}
+    \item{If the loss for an estimate $\hat{\theta}$ is $(\theta - \hat{\theta})^2$, the best estimate is the posterior mean}
+    \item{If the loss for an estimate $\hat{\theta}$ is $|\theta - \hat{\theta}|$, the best estimate is the posterior median}
+    \item{If the loss for an estimate $\hat{\theta}$ is $1$ if $\theta \neq \hat{\theta}$, the best estimate is the highest posterior mode}
+  \end{itemize}
+}
+
+\frame
+{
   \begin{itemize}
     \item{In practice, from now on, we're just going to use the mean and median of the posterior as point estimates}
   \end{itemize}
 }
 
-%
-%\frame
-%{
-%Improprer
-%Conjugate
-%Weakly informative
-%Jeffreys prior
-%}
-
 \begin{frame}
   \begin{itemize}
     \item{In modern Bayesian statistics, we use conjugacy whenever we can}
     \item{Otherwise, we use MCMC techniques}
-    \item{For me, that means I always use MCMC}
   \end{itemize}
 \end{frame}
 
+\frame
+{
+  \begin{itemize}
+    \item{MCMC depends on a remarkable result}
+    \item{We can draw samples from a probability distribution that's known only up to a constant}
+    \item{The posterior is just such a distribution}
+    \item{The constant is the evidence}
+  \end{itemize}
+}
+
 \begin{frame}
   \begin{itemize}
-    \item{MCMC techniques draw samples from the posterior}
+    \item{MCMC techniques draw many samples from the posterior}
     \item{There are therefore Monte Carlo methods}
     \item{As such, their quality increases when we take more samples}
     \item{To find each sample, a Markov chain is used}
